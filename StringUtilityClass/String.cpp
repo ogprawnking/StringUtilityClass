@@ -33,8 +33,6 @@ String::String(const char* _str) // overloaded or parameterized
 	}
 }
 
-
-
 // copy constructor (deep copy)
 // enter reference to another class and object
 String::String(const String& _other)
@@ -56,27 +54,65 @@ String::~String()
 	cout << "-- string destructor called" << endl;
 }
 
-//size_t String::Length() const
-//{
-//	
-//	return size_t();
-//}
-//
-//char& String::CharacterAt(size_t _index)
-//{
-//	// TODO: insert return statement here
-//}
-//
-//const char& String::CharacterAt(size_t _index) const
-//{
-//	// TODO: insert return statement here
-//}
-//
-//bool String::EqualTo(const String& _other) const
-//{
-//	return false;
-//}
-//
+char& String::CharacterAt(size_t _index)
+{
+	if (_index >= strlen(mystring) || _index < 0)
+	{
+		// Return '\0' if index is out of range... Ensures empty string.
+		char nullChar = '\0';
+		return nullChar;
+	}
+	else
+		cout << "character at index " << _index << " is: " << mystring[_index] << endl;
+		return mystring[_index]; // character at index inputted
+}
+
+// The return type is a reference to a const char, which means that the caller cannot modify the character retrieved through this function.
+//body is the same as the one before... just uses const instead of non-const.
+const char& String::CharacterAt(size_t _index) const // const after means it won't change what was inputted.
+{
+	if (_index >= strlen(mystring) || _index < 0)
+	{
+		// Return '\0' if index is out of range... Ensures empty string.
+		char nullChar = '\0';
+		return nullChar;
+	}
+	else
+		cout << "const character at index " << _index << " is: " << mystring[_index] << endl;
+	return mystring[_index]; // character at index inputted
+}
+
+// Returns an integer representing the count of characters up to the null termination character
+size_t String::Length() const
+{
+	// store length of (mystring) in length variable.
+	size_t length = strlen(mystring);
+
+	// if length > 0 then -1 (for nullChar). Else return 0;
+	cout << "Length of string is: " << length << endl;
+	return (length > 0) ? (length - 1) : 0;
+}
+
+// Returns true if str contains the same characters.
+bool String::EqualTo(const String& _other) const
+{
+	// Are both strings same length?
+	if (Length() == _other.Length())
+	{
+		// compare each character from input string and  known string.
+		for (size_t i = 0; i < Length(); i++)
+		{
+			// If char's aren equal return true.
+			if (mystring[i] == _other.mystring[i])
+				return true;
+		}
+		// else false
+	return false;
+	}
+	else
+		return false;
+}
+
 //String& String::Append(const String& _str)
 //{
 //	// TODO: insert return statement here

@@ -13,12 +13,13 @@ public:
 	~String();
 
 public:
-	/*size_t Length() const;
 	char& CharacterAt(size_t _index);
 	const char& CharacterAt(size_t _index) const;
-
+	size_t Length() const;
+	
 	bool EqualTo(const String& _other) const;
-
+	
+	/*
 	String& Append(const String& _str);
 	String& Prepend(const String& _str);
 
