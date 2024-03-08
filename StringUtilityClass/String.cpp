@@ -10,7 +10,7 @@ using namespace std;
 {
 	mystring = new char[1];
 	mystring[0] = '\0';
-	cout << "PART1		++ default constructor called" << endl;
+	//cout << "PART1		++ default constructor called" << endl;
 }
 
 // constructor w/ 1 argument
@@ -23,15 +23,15 @@ String::String(const char* _str) // overloaded or parameterized
 		mystring = new char[strlen(_str) + 1]; // +1 makes space for nullchar
 		strcpy(mystring, _str);
 		mystring[strlen(_str)] = '\0'; // adds nullchar to the end of array.
-		cout << "PART 2		++ Parameterized constructor called" << endl;
-		cout << "The string entered is: " << mystring << endl;
+		//cout << "PART 2		++ Parameterized constructor called" << endl;
+		//cout << "The string entered is: " << mystring << endl;
 	}
 	else // make empty string
 	{
 		mystring = new char[1];
 		mystring[0] = '\0';
-		cout << "PART 2		++ Overlaoded constructor called" << endl;
-		cout << "Invalid input. Empty string created.\n" << endl;
+		//cout << "PART 2		++ Overlaoded constructor called" << endl;
+		//cout << "Invalid input. Empty string created.\n" << endl;
 	}
 }
 
@@ -45,8 +45,8 @@ String::String(const String& _other)
 	strcpy(mystring, _other.mystring);
 	mystring[strlen(_other.mystring)] = '\0'; // --good practice--
 
-	cout << "PART 3		++ copy constructor called" << endl;
-	cout << "String copied is: " << mystring << endl;
+	//cout << "PART 3		++ copy constructor called" << endl;
+	//cout << "String copied is: " << mystring << endl;
 }
 
 String::~String()
@@ -63,13 +63,13 @@ char& String::CharacterAt(size_t _index)
 	{
 		// Return '\0' if index is out of range... Ensures empty string.
 		char nullChar = '\0';
-		cout << "PART 4		++characterAt constructor called" << endl;
-		cout << "Index out of range. Empty string created";
+		//cout << "PART 4		++characterAt constructor called" << endl;
+		//cout << "Index out of range. Empty string created";
 		return nullChar;
 	}
 	else
-		cout << "PART 4		++CharacterAt Constructor called" << endl; 
-		cout << "character at index " << _index << " is: " << mystring[_index] << "\n" << endl;
+		//cout << "PART 4		++CharacterAt Constructor called" << endl; 
+		//cout << "character at index " << _index << " is: " << mystring[_index] << "\n" << endl;
 		return mystring[_index]; // character at index inputted
 }
 
@@ -81,13 +81,13 @@ const char& String::CharacterAt(size_t _index) const // const after means it won
 	{
 		// Return '\0' if index is out of range... Ensures empty string.
 		char nullChar = '\0';
-		cout << "PART 4		++CONSTcharacterAt constructor called" << endl;
-		cout << "Index out of range. Empty string created";
+		//cout << "PART 4		++CONSTcharacterAt constructor called" << endl;
+		//cout << "Index out of range. Empty string created";
 		return nullChar;
 	}
 	else
-	cout << "PART 4 ALT	++CONSTcharacterAt Constructor called" << endl;
-	cout << "const character at index " << _index << " is: " << mystring[_index] << "\n" << endl;
+	//cout << "PART 4 ALT	++CONSTcharacterAt Constructor called" << endl;
+	//cout << "const character at index " << _index << " is: " << mystring[_index] << "\n" << endl;
 	return mystring[_index]; // character at index inputted
 }
 
@@ -98,8 +98,8 @@ size_t String::Length() const
 	size_t length = strlen(mystring);
 
 	// if length > 0 then -1 (for nullChar). Else return 0;
-	cout << "PART 5		++Length constructor called" << endl;
-	cout << "Length of string is: " << length << "\n" << endl;
+	//cout << "PART 5		++Length constructor called" << endl;
+	//cout << "Length of string is: " << length << "\n" << endl;
 	return (length > 0) ? (length) : 0;
 }
 
@@ -128,16 +128,16 @@ bool String::EqualTo(const String& _other) const
 		{
 			// If char's aren equal return true.
 			if (mystring[i] == _other.mystring[i])
-				cout << "PART 6		++EqualTo constructor called" << endl;
-				cout << "The strings ARE equal. \n" << endl;
+				//cout << "PART 6		++EqualTo constructor called" << endl;
+				//cout << "The strings ARE equal. \n" << endl;
 				return true;
 		}
-		// else false
+	// else false
 	return false;
 	}
 	else
-		cout << "PART 6		++EqualTo constrcutor called" << endl;
-		cout << "The strings are NOT equal. \n" << endl;
+		//cout << "PART 6		++EqualTo constrcutor called" << endl;
+		//cout << "The strings are NOT equal. \n" << endl;
 		return false;
 }
 // Adds _str to end of string
@@ -162,8 +162,8 @@ String& String::Append(const String& _str)
 	// update to point to new string
 	mystring = newString;
 	
-	cout << "PART 7		++Append constructor called" << endl;
-	cout << "Appended string is: " << mystring << "\n" << endl;
+	//cout << "PART 7		++Append constructor called" << endl;
+	//cout << "Appended string is: " << mystring << "\n" << endl;
 
 	// return reference to modified object
 	return *this;
@@ -185,8 +185,8 @@ String& String::Prepend(const String& _str)
 	delete[] mystring;
 	// update old string to point to new string
 	mystring = newString;
-	cout << "PART 8		++Prepend constructor called" << endl;
-	cout << "Prepended string is: " << mystring << "\n" << endl;
+	//cout << "PART 8		++Prepend constructor called" << endl;
+	//cout << "Prepended string is: " << mystring << "\n" << endl;
 
 	 return *this;
 }
@@ -198,21 +198,57 @@ const char* String::CStr() const
 	return mystring;
 }
 
-//String& String::ToLower()
-//{
-//	// TODO: insert return statement here
-//}
-//
-//String& String::ToUpper()
-//{
-//	// TODO: insert return statement here
-//}
-//
-//size_t String::Find(const String& _str)
-//{
-//	return size_t();
-//}
-//
+String& String::ToLower()
+{
+	for (int i = 0; i < Length(); i++)
+	{
+		mystring[i] = tolower(mystring[i]);
+	}
+	return *this;
+}
+
+
+String& String::ToUpper()
+{
+	for (int i = 0; i < Length(); i++)
+	{
+		mystring[i] = toupper(mystring[i]);
+	}
+	return *this;
+}
+
+size_t String::Find(const String& _str)
+{
+	// Returns the location of the findString.If not found, return -1
+	size_t len = Length(); // length of original string
+	size_t subLen = _str.Length(); // length of input string
+
+	if (subLen > len) return string::npos;// if substring longer than og string. return -1 OR string::npos
+
+	// iterate through mains tring while searching for substring
+	for (size_t i = 0; i <= len - subLen; i++)
+	{
+		// check if substring matches the portion of the main string
+		bool found = true;
+		for (size_t j = 0; j < subLen; j++)
+		{
+			if (mystring[i + j] != _str.mystring[j])
+			{
+			found = false;
+			break; // break inner loop if chars don't match
+			}
+		}
+		//if found, return starting index
+		if (found)
+		{
+			//cout << "String found! Beginning at index: " << i << "\n";
+			return i;
+		}
+	}
+
+	return string::npos; // Substring not found or string::npos
+}
+
 //size_t String::Find(size_t _startIndex, const String& _str)
 //{
 //	return size_t();

@@ -62,5 +62,44 @@ int main()
 
     // cout << str3 << endl; // <----------This is a problem without it. Value is a char** (pointer to a pointer) not char* (just a pointer)
 
+
+    // ----- 9 -----
+
+    String str4 = "HELLO\n";
+    str4.ToLower();
+    cout << str4.CStr();
+
+
+    // ----- 10 -----
+
+    str4.ToUpper();
+    cout << str4.CStr();
+
     return 0;
-    }
+
+    // ----- 11 -----
+
+    String stringFind("Hello, world");
+    cout << "Total string: " << stringFind.CStr() << "\n";
+    
+    size_t indexString = stringFind.Find("w");
+    cout << "Index of string to find is at index: " << indexString << "\n\n\n\n";
+
+
+    //  // Create an instance of the String class
+    //String str("Hello, world!");
+
+    //// Call the Find method to search for a substring and capture the result
+    //size_t index = str.Find("world");
+
+    //// Check if the substring was found
+    //if (index != static_cast<size_t>(-1)) 
+    //{
+    //    std::cout << "Substring found at index: " << index << std::endl;
+    //}
+    //else 
+    //{
+    //    std::cout << "Substring not found." << std::endl;
+    //}
+
+}
