@@ -39,6 +39,28 @@ int main()
     size_t StrLength = stringL.Length();
 
     // ----- 6 -----
+    String compare1 = "Hello there!";
+    String compare2 = "Hello there!"; //change one of these strings to change outcome
+    
+    compare1.EqualTo(compare2);
+
+    // ----- 7 -----
+
+    String str1("Hello ");
+    String str2("World");
+    str1.Append(str2).Append("!");
+
+    String ogVar = "world";
+    String PrependVar = ("Hello ");
+    ogVar.Prepend(PrependVar);
+
+
+    // ----- 8 -----
+    // this allows you to use the 'cout <<' on your string (as per below)
+    String str3("Hello ");
+    cout << str3.CStr() << endl;
+
+    // cout << str3 << endl; // <----------This is a problem without it. Value is a char** (pointer to a pointer) not char* (just a pointer)
 
     return 0;
     }

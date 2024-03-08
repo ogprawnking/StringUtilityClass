@@ -19,13 +19,13 @@ public:
 	
 	bool EqualTo(const String& _other) const;
 	
-	/*
 	String& Append(const String& _str);
 	String& Prepend(const String& _str);
 
 	const char* CStr() const;
 
-	String& ToLower();
+	//String& ToLower();
+	/*
 	String& ToUpper();
 
 	size_t Find(const String& _str);

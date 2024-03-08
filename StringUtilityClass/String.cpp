@@ -5,12 +5,12 @@
 
 using namespace std;
 
-// constructor w/ no arguments. Set value to '\0'
-String::String()
+// Default  constructor. string = '\0'
+	String::String()
 {
 	mystring = new char[1];
 	mystring[0] = '\0';
-	cout << "++ default constructor called" << endl;
+	cout << "PART1		++ default constructor called" << endl;
 }
 
 // constructor w/ 1 argument
@@ -23,13 +23,15 @@ String::String(const char* _str) // overloaded or parameterized
 		mystring = new char[strlen(_str) + 1]; // +1 makes space for nullchar
 		strcpy(mystring, _str);
 		mystring[strlen(_str)] = '\0'; // adds nullchar to the end of array.
-		cout << "++ Parameterized constructor called" << endl;
+		cout << "PART 2		++ Parameterized constructor called" << endl;
 		cout << "The string entered is: " << mystring << endl;
 	}
 	else // make empty string
 	{
 		mystring = new char[1];
 		mystring[0] = '\0';
+		cout << "PART 2		++ Overlaoded constructor called" << endl;
+		cout << "Invalid input. Empty string created.\n" << endl;
 	}
 }
 
@@ -43,7 +45,7 @@ String::String(const String& _other)
 	strcpy(mystring, _other.mystring);
 	mystring[strlen(_other.mystring)] = '\0'; // --good practice--
 
-	cout << "++ copy constructor called" << endl;
+	cout << "PART 3		++ copy constructor called" << endl;
 	cout << "String copied is: " << mystring << endl;
 }
 
@@ -51,7 +53,8 @@ String::~String()
 {
 	delete[] mystring;
 	mystring = nullptr;
-	cout << "-- string destructor called" << endl;
+	
+	cout << "-- string DESTRUCTOR called" << endl;
 }
 
 char& String::CharacterAt(size_t _index)
@@ -60,10 +63,13 @@ char& String::CharacterAt(size_t _index)
 	{
 		// Return '\0' if index is out of range... Ensures empty string.
 		char nullChar = '\0';
+		cout << "PART 4		++characterAt constructor called" << endl;
+		cout << "Index out of range. Empty string created";
 		return nullChar;
 	}
 	else
-		cout << "character at index " << _index << " is: " << mystring[_index] << endl;
+		cout << "PART 4		++CharacterAt Constructor called" << endl; 
+		cout << "character at index " << _index << " is: " << mystring[_index] << "\n" << endl;
 		return mystring[_index]; // character at index inputted
 }
 
@@ -75,10 +81,13 @@ const char& String::CharacterAt(size_t _index) const // const after means it won
 	{
 		// Return '\0' if index is out of range... Ensures empty string.
 		char nullChar = '\0';
+		cout << "PART 4		++CONSTcharacterAt constructor called" << endl;
+		cout << "Index out of range. Empty string created";
 		return nullChar;
 	}
 	else
-		cout << "const character at index " << _index << " is: " << mystring[_index] << endl;
+	cout << "PART 4 ALT	++CONSTcharacterAt Constructor called" << endl;
+	cout << "const character at index " << _index << " is: " << mystring[_index] << "\n" << endl;
 	return mystring[_index]; // character at index inputted
 }
 
@@ -89,9 +98,24 @@ size_t String::Length() const
 	size_t length = strlen(mystring);
 
 	// if length > 0 then -1 (for nullChar). Else return 0;
-	cout << "Length of string is: " << length << endl;
-	return (length > 0) ? (length - 1) : 0;
+	cout << "PART 5		++Length constructor called" << endl;
+	cout << "Length of string is: " << length << "\n" << endl;
+	return (length > 0) ? (length) : 0;
 }
+
+//				OR use below method.
+
+//size_t String::Length() const
+//{
+//	// store length of (mystring) in length variable.
+//	size_t length = 0;
+//	while (mystring[length] != '\0')
+//		length++;
+//		return length;
+//}
+
+
+
 
 // Returns true if str contains the same characters.
 bool String::EqualTo(const String& _other) const
@@ -104,30 +128,76 @@ bool String::EqualTo(const String& _other) const
 		{
 			// If char's aren equal return true.
 			if (mystring[i] == _other.mystring[i])
+				cout << "PART 6		++EqualTo constructor called" << endl;
+				cout << "The strings ARE equal. \n" << endl;
 				return true;
 		}
 		// else false
 	return false;
 	}
 	else
+		cout << "PART 6		++EqualTo constrcutor called" << endl;
+		cout << "The strings are NOT equal. \n" << endl;
 		return false;
 }
+// Adds _str to end of string
+String& String::Append(const String& _str)
+{
+	// add sizes of strings together
+	size_t sizeNewString = Length() + _str.Length();
+	
+	// allocate memory for full string(newstring)
+	char* newString = new char[sizeNewString + 1]; // +1 for nullchar
 
-//String& String::Append(const String& _str)
-//{
-//	// TODO: insert return statement here
-//}
-//
-//String& String::Prepend(const String& _str)
-//{
-//	// TODO: insert return statement here
-//}
-//
-//const char* String::CStr() const
-//{
-//	return nullptr;
-//}
-//
+	// copy current string to newString
+	//	newstring = mystring
+	strcpy(newString, mystring);
+
+	// concatenate newinput data (_str) to newString
+	strcat(newString, _str.mystring);
+
+	// delete old memory from old string
+	delete[] mystring;
+
+	// update to point to new string
+	mystring = newString;
+	
+	cout << "PART 7		++Append constructor called" << endl;
+	cout << "Appended string is: " << mystring << "\n" << endl;
+
+	// return reference to modified object
+	return *this;
+
+}
+// Adds _str to the beginning of the string
+String& String::Prepend(const String& _str)
+{
+	// add size of both strings together
+	size_t sizeOfNewString = Length() + _str.Length();
+	// allocate memory for full string
+	char* newString = new char[sizeOfNewString + 1];
+	// copy current string to newString
+	// newstring = mystring
+	strcpy(newString, _str.mystring);
+	// concatenate newinput data (_str) to newstring)
+	strcat(newString, mystring);
+	// delete old memory from old string
+	delete[] mystring;
+	// update old string to point to new string
+	mystring = newString;
+	cout << "PART 8		++Prepend constructor called" << endl;
+	cout << "Prepended string is: " << mystring << "\n" << endl;
+
+	 return *this;
+}
+
+// retrieves underlying C-style string from Strin object.
+// Use with std::cout to print string.
+const char* String::CStr() const
+{
+	return mystring;
+}
+
 //String& String::ToLower()
 //{
 //	// TODO: insert return statement here
