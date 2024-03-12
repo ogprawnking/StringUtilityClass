@@ -54,7 +54,7 @@ String::~String()
 	delete[] mystring;
 	mystring = nullptr;
 	
-	cout << "-- string DESTRUCTOR called" << endl;
+	//cout << "-- string DESTRUCTOR called" << endl;
 }
 
 char& String::CharacterAt(size_t _index)
@@ -219,34 +219,33 @@ String& String::ToUpper()
 
 size_t String::Find(const String& _str)
 {
-	// Returns the location of the findString.If not found, return -1
-	size_t len = Length(); // length of original string
-	size_t subLen = _str.Length(); // length of input string
+	// Get pointers to sourcec string and substring to be found.
+	//	OR 'converts to c_style strings for easier use with arrays.
+	const char* substr = _str.mystring;
+	const char* source = mystring;
+	size_t sourceLen = Length();
+	size_t substrLen = _str.Length();
 
-	if (subLen > len) return string::npos;// if substring longer than og string. return -1 OR string::npos
+	// if the to find string is larger than source. Then return error.
+	if (substrLen > sourceLen) return std::string::npos;
 
-	// iterate through mains tring while searching for substring
-	for (size_t i = 0; i <= len - subLen; i++)
+	for (size_t i = 0; i <= sourceLen - substrLen; i++)
 	{
-		// check if substring matches the portion of the main string
-		bool found = true;
-		for (size_t j = 0; j < subLen; j++)
-		{
-			if (mystring[i + j] != _str.mystring[j])
-			{
-			found = false;
-			break; // break inner loop if chars don't match
-			}
-		}
-		//if found, return starting index
-		if (found)
-		{
-			//cout << "String found! Beginning at index: " << i << "\n";
-			return i;
-		}
-	}
+		// create j outside inner loop so that we can have it as a statement for a return value.
+		size_t j;
 
-	return string::npos; // Substring not found or string::npos
+		// Check if substr matches the portion o the source string
+		for (j = 0; j < substrLen; j++)
+		{
+			if (source[i + j] != substr[j])
+				break;
+		}
+		// If substr is found, return its position in the sourceStr
+		if (j == substrLen)
+			return i;
+	}
+	// if substr is not found, return value for failure.
+	return std::string::npos;
 }
 
 //size_t String::Find(size_t _startIndex, const String& _str)
