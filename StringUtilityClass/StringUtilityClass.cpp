@@ -199,8 +199,26 @@ int main()
     str18 = otherstr18;
     cout << "string result: " << str18.CStr() << endl;
 
+    // ----- 19 -----
+    // test [] operator
+    String accessarray("Hello world");
+    cout << "Original string: " << accessarray.CStr() << endl;
+    accessarray[0] = 'J';
+    cout << "Change array via element [0]: " << accessarray.CStr() << endl;
+    
+    // ----- 19 -----
+    //test const[] operator
+    cout << accessarray.CStr() << endl;
+    cout << "Accessed element at position [2] is: " << accessarray[2] << endl; // change [number] to access different elements
 
 
+    // ----- 20 -----
+    // test += operator
+    String finalString("Hello ");
+    String finalSubString("Cliff :)");
+    cout << "Original string    " << finalString.CStr() << "\n" << "Substring:  " << finalSubString.CStr() << endl;
+    finalString += finalSubString;
+    cout << "String += together:    " << finalString.CStr() << endl;
 
     // ----- END OF PROGRAM -----
 

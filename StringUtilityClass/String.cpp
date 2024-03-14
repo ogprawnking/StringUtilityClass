@@ -8,11 +8,11 @@ using namespace std;
 
 // Default  constructor. string = '\0'
 	String::String()
-{
+	{
 	mystring = new char[1];
 	mystring[0] = '\0';
 	//cout << "PART1		++ default constructor called" << endl;
-}
+	}
 
 // constructor w/ 1 argument
 // allocates space for inputted _str to mystring
@@ -335,12 +335,47 @@ String& String::operator=(const String& _str)
 	return *this; //return ref to mystring new value
 }
 
-//char& String::operator[](size_t _index)
-//{
-//	// TODO: insert return statement here
-//}
-//
-//const char& String::operator[](size_t _index) const
-//{
-//	// TODO: insert return statement here
-//}
+
+// can read and write to data inside index accessed
+char& String::operator[](size_t _index)
+{
+	// Returns the position the array based on the _index inputed
+	return mystring[_index];
+}
+
+// can only read from data at specific index. Thus cannot alter the data inside.(CONST)
+const char& String::operator[](size_t _index) const
+{
+	// Same as previous but string cannot be changed.
+	return mystring[_index]; 
+}
+
+// is lhs first or second?
+bool String::operator<(const String& _other)
+{
+	return strcmp(mystring, _other.mystring) < 0; // if mystring less than _other.mystring.. return true
+}
+
+String& String::operator+=(const String& _other)
+{
+	// calc new length of string after appending
+	size_t newLength = Length() + _other.Length();
+
+	// Allocate memory for new string
+	char* newString = new char[newLength + 1]; // +1 for nullchar
+
+	// copy current string to empty 'newString'
+	strcpy(newString, mystring);
+
+	// copy input data and place onto end of newString
+	strcat(newString, _other.mystring);
+
+	// Deallocate old mystring data
+	delete[] mystring;
+
+	//update mystring to have complete string
+	mystring = newString;
+
+	return *this; // return completed 'mystring' string
+}
+

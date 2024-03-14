@@ -40,11 +40,15 @@ public:
 	bool operator!=(const String& _other);
 
 	String& operator=(const String& _str);
-	/*
 
 	char& operator[](size_t _index);
-	const char& operator[](size_t _index) const;*/
+	const char& operator[](size_t _index) const;
 
+	bool operator<(const String& _other);
+
+	String& operator+=(const String& _other);
+
+	
 private:
 	/*
 	* Put your internal data structures and members here
