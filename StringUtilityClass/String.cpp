@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "String.h"
 #include <iostream>
+//#include <string>
 #include <cstring> // gives access to 'str' functions (i.e. strlen, strcmp etc.)
 
 using namespace std;
@@ -126,7 +127,7 @@ bool String::EqualTo(const String& _other) const
 		// compare each character from input string and  known string.
 		for (size_t i = 0; i < Length(); i++)
 		{
-			// If char's aren equal return true.
+			// If char's are equal return true.
 			if (mystring[i] == _other.mystring[i])
 				//cout << "PART 6		++EqualTo constructor called" << endl;
 				//cout << "The strings ARE equal. \n" << endl;
@@ -248,41 +249,92 @@ size_t String::Find(const String& _str)
 	return std::string::npos;
 }
 
-//size_t String::Find(size_t _startIndex, const String& _str)
-//{
-//	return size_t();
-//}
-//
-//String& String::Replace(const String& _find, const String& _replace)
-//{
-//	// TODO: insert return statement here
-//}
-//
-//String& String::ReadFromConsole()
-//{
-//	// TODO: insert return statement here
-//}
-//
-//String& String::WriteToConsole()
-//{
-//	// TODO: insert return statement here
-//}
-//
-//bool String::operator==(const String& _other)
-//{
-//	return false;
-//}
-//
-//bool String::operator!=(const String& _other)
-//{
-//	return false;
-//}
-//
-//String& String::operator=(const String& _str)
-//{
-//	// TODO: insert return statement here
-//}
-//
+
+// Return location of strToFind. Beginning search from startIndex. If not found return -1
+size_t String::Find(size_t _startIndex, const String& _str)
+{
+	// If index isn't in range, return -1
+	if (_startIndex >= Length()) return -1;
+
+	// get position from finding string inside a string
+	// strstr finds first occurence of nullchar to then point to the next character-
+	// this is then the position pointed to.
+	const char* startPos = strstr(mystring + _startIndex, _str.mystring); 
+	if (startPos != nullptr) return startPos - mystring; // substring position - mystring position?
+	else return -1;
+}
+
+String& String::Replace(const String& _find, const String& _replace)
+{
+	size_t startPos = 0;
+	while ((startPos = Find(startPos, _find)) != -1)
+	{
+		// create new string to hold the replaced content
+		string replacedContent = string(mystring, mystring + startPos) + _replace.CStr() + string(mystring + startPos + _find.Length());
+
+		// allocate memory for the new string data
+		char* buffer = new char[replacedContent.length() + 1]; // +1 for nullchar
+
+		// copy replaced content to the buffer
+		strcpy(buffer, replacedContent.c_str());
+
+		delete[] mystring;
+
+		mystring = buffer;
+
+		startPos += _replace.Length(); //move start pos past the replaced substr
+	}
+	return *this; // a reference to itself
+}
+
+// Wait for input in the console window and store the result
+String& String::ReadFromConsole()
+{
+	// TODO: insert return statement here
+	cout << "Enter a string: "; // Prompt user for a string
+	char input[1024]; // temp buffer for input
+	cin.getline(input, 1024); // read input into temp buffer
+	size_t inputLen = strlen(input); // length of the user's input
+	mystring = new char[inputLen + 1]; // allocate memory for string
+	strcpy(mystring, input); // copy input to allocated memory in mystring
+	return *this;
+}
+
+// Write the string to the console window
+String& String::WriteToConsole()
+{
+	// TODO: insert return statement here
+	cout << mystring; //print whatever was read and stored in console
+	return *this; // return ref to current string object
+}
+
+// returns true if lhs == rhs
+bool String::operator==(const String& _other)
+{
+	// if two strings are the same then it will return 0. Else false(1)
+	return strcmp(mystring, _other.mystring) == 0;
+}
+
+// returns true if lhs is NOT equal to rhs
+bool String::operator!=(const String& _other)
+{
+	// if two trings AREN'T the same then it will return 0;
+	return strcmp(mystring, _other.mystring) != 0;
+}
+
+// replaces the characters in lhs with the characters in the rhs
+String& String::operator=(const String& _str)
+{
+	// TODO: insert return statement here
+	if (this != &_str) // if 'this' isn't equal to otherString (_str)
+	{
+		delete[] mystring; // Deallocate any previous data in mystring
+		mystring = new char[_str.Length() + 1]; //Allocate memory.. Len of new string + nullchar
+		strcpy(mystring, _str.mystring); // copy data
+	}
+	return *this; //return ref to mystring new value
+}
+
 //char& String::operator[](size_t _index)
 //{
 //	// TODO: insert return statement here

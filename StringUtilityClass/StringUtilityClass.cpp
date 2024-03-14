@@ -39,12 +39,12 @@ int main()
     const String constString("4.written as Const");
     const char& character1 = constString.CharacterAt(index);
     cout << "Character " << character1 << " is at position " << index << " of the string: " << constString.CStr() << endl;
-    
+    cout << "\n\n";
     // ----- 5 -----
     String stringL = "Hello";
     size_t StrLength = stringL.Length();
     cout << "The length of " << stringL.CStr() << " is: " << StrLength << endl;
-
+    cout << "\n\n";
     // ----- 6 -----
     String compare1 = "Hello there!";
     String compare2 = "Hello there!"; //change one of these strings to change outcome
@@ -53,7 +53,7 @@ int main()
         cout << "The strings are the same" << endl;
     else cout << "The strings are NOT the same" << endl;
 
-
+    cout << "\n\n";
     // ----- 7 -----
 
 
@@ -71,7 +71,7 @@ int main()
     ogVar.Prepend(PrependVar);
     cout << ogVar.CStr() << endl;
 
-
+    cout << "\n\n";
     // ----- 8 -----
     // this allows you to use the 'cout <<' on your string (as per below)
     String str3("can 'cout << string.CStr()' to console now!");
@@ -79,7 +79,7 @@ int main()
 
     // cout << str3 << endl; // <------This is a problem without it. Value is a char** (pointer to a pointer) not char* (just a pointer)
 
-
+    cout << "\n\n";
     // ----- 9 -----
 
     String str4 = "TO LOWER CASE\n";
@@ -93,7 +93,7 @@ int main()
     cout << str5.CStr();
 
     
-
+    cout << "\n\n";
     // ----- 11 -----
 
     String str11("Hello, world");
@@ -111,24 +111,101 @@ int main()
     {
         cout << "Substring not found." << endl;
     }
+    
+    // ----- 12 -----
 
-    cout << "Yo momma \n";
+    String str12("Hello, world");
+    String substr12("llo");
+    size_t posi = str11.Find(1, substr12); // .Find(index to start search, substr to find)
+    if (posi != -1 ) 
+    {
+        cout << "Substring found at position: " << posi << endl;
+    }
+    else
+    {
+        cout << "Substring not found." << endl;
+    }
+    
+    cout << "\n\n";
+    // ----- 13 -----
+
+    String str13("Hello, world");
+    String substr13("everyone");
+    cout << "Original string: " << str13.CStr() << endl;
+    cout << "Replacement string: " << substr13.CStr() << endl;
+
+    str13.Replace("world", substr13);
+    cout << "Final string (replaced): " << str13.CStr() << endl;
+    cout << "\n\n";
+    // ----- 14 -----
+    String fromConsole;
+    fromConsole.ReadFromConsole();
+    //cout << "String: " << fromConsole.CStr() << endl;
 
 
-    //  // Create an instance of the String class
-    //String str("Hello, world!");
+    // ----- 15 -----
+    cout << "write to console: ";
+    fromConsole.WriteToConsole();
+    cout << "\n\n";
 
-    //// Call the Find method to search for a substring and capture the result
-    //size_t index = str.Find("world");
+    // ----- 16 -----
+    String equal1("Hello");
+    String equal2("World");
+    String equal3("Hello");
 
-    //// Check if the substring was found
-    //if (index != static_cast<size_t>(-1)) 
-    //{
-    //    std::cout << "Substring found at index: " << index << std::endl;
-    //}
-    //else 
-    //{
-    //    std::cout << "Substring not found." << std::endl;
-    //}
+    // Test == operator
+    cout << "---test == operator---" << endl;
+    if (equal1 == equal2)
+    {
+        cout << "'equal1' is equal to 'equal2'" << endl;
+    } else {
+        cout << "'equal1' is NOT equal to 'equal2'" << endl;
+    }
+    
+    if (equal1 == equal3)
+    {
+        cout << "'equal1' is equal to 'equal3'" << endl;
+    } else {
+        cout << "'equal1' is NOT equal to 'equal3'" << endl;
+    }
+
+
+    // ----- 17 -----
+    // Test != operator
+    cout << "---test != operator---" << endl;
+    if (equal1 != equal2)
+    {
+        cout << "'equal1' is not equal to 'equal2'" << endl;
+    }
+    else {
+        cout << "'equal1' is equal to 'equal2'" << endl;
+    }
+    
+    if (equal1 != equal3)
+    {
+        cout << "'equal1' is not equal to 'equal3'" << endl;
+    }
+    else {
+        cout << "'equal1' is equal to 'equal3'" << endl;
+    }
+    cout << "\n\n";
+    // ----- 18 -----
+    // test = operator
+    String str18("Hello");
+    String otherstr18("World");
+
+    cout << "source string: " << str18.CStr() << endl;
+    cout << "other string: " << otherstr18.CStr() << endl;
+    str18 = otherstr18;
+    cout << "string result: " << str18.CStr() << endl;
+
+
+
+
+    // ----- END OF PROGRAM -----
+
+
+    String end("\n\n\n----- end of program -----\n\n\n");
+    cout << end.ToUpper().CStr();
     return 0;
 }

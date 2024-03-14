@@ -28,7 +28,6 @@ public:
 	String& ToUpper();
 
 	size_t Find(const String& _str);
-	/*
 	size_t Find(size_t _startIndex, const String& _str);
 
 	String& Replace(const String& _find, const String& _replace);
@@ -41,6 +40,7 @@ public:
 	bool operator!=(const String& _other);
 
 	String& operator=(const String& _str);
+	/*
 
 	char& operator[](size_t _index);
 	const char& operator[](size_t _index) const;*/
